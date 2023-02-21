@@ -6,7 +6,7 @@ namespace Assets.Scripts.Enemies
 {
     public class Enemy : MonoBehaviour
     {
-        [SerializeField] private float _arrivalTreshold = 0.1f;
+        [SerializeField] private float _maxMovementDistance;
 
         private NavMeshAgent _agent;
 
@@ -24,18 +24,18 @@ namespace Assets.Scripts.Enemies
         {
             while (true)
             {
-                _agent.SetDestination(RandomNavmeshLocation(4f));
+                _agent.SetDestination(RandomNavmeshLocation(_maxMovementDistance));
                 yield return new WaitForSeconds(2);
             }
         }
 
         public Vector3 RandomNavmeshLocation(float radius)
         {
-            Vector3 randomDirection = Random.insideUnitSphere * radius;
+            Vector3 randomDirection = Random.onUnitSphere * radius;
+            randomDirection.y = 0f;
             randomDirection += transform.position;
-            NavMeshHit hit;
             Vector3 finalPosition = Vector3.zero;
-            if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
+            if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, radius, 1))
             {
                 finalPosition = hit.position;
             }
