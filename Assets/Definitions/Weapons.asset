@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be925b0580e9e1b409b7e72107a23b9a, type: 3}
+  m_Name: Weapons
+  m_EditorClassIdentifier: 
+  _collection:
+  - _name: Machine Gun
+    _id: 0
+    _damage: 1
+    _shotInterval: 0.5
+    _projectileSpeed: 3
+  - _name: Missile Launcher
+    _id: 1
+    _damage: 3
+    _shotInterval: 2
+    _projectileSpeed: 1

@@ -1,4 +1,6 @@
+using Assets.Scripts.Data.Definitions;
 using Assets.Scripts.Enemies;
+using Assets.Scripts.Weapons;
 using System.Collections;
 using UnityEngine;
 using Zenject;
@@ -10,7 +12,7 @@ namespace Assets.Scripts.Player
         // parameters
         [SerializeField] private float _playerSpeed = 2.0f;
         [SerializeField] private float _rotationSpeed = 4f;
-        [SerializeField] private float _fireInterval = 2f;
+        [SerializeField] private Weapon _weapon;
 
         // references
         private CharacterController _characterController;
@@ -18,7 +20,6 @@ namespace Assets.Scripts.Player
 
         // internal variables
         private Vector2 _direction;
-        private Coroutine _firingRoutine;
         private bool _isMoving;
 
         [Inject]
@@ -45,18 +46,17 @@ namespace Assets.Scripts.Player
             }
             else
             {
-                Fire();
+                LockOnTarget();
             }
         }
 
         // if firing => stop
         private void StopFiring()
         {
-            if (_firingRoutine != null)
-            {
-                StopCoroutine(_firingRoutine);
-                _firingRoutine = null;
-            }
+            if (!_weapon.IsFiring)
+                return;
+
+            _weapon.StopFiring();
         }
 
         private void CheckMovementStatus()
@@ -90,27 +90,15 @@ namespace Assets.Scripts.Player
             }
         }
 
-        private void Fire()
+        private void LockOnTarget()
         {
             // find and rotate towards nearest enemy
             var enemy = _enemyCounter.FindClosestEnemy(transform.position);
             var direction = (enemy.transform.position - transform.position).normalized;
             RotatePlayer(new Vector2(direction.x, direction.z));
 
-            // start firing if don't already
-            if (_firingRoutine == null)
-            {
-                _firingRoutine = StartCoroutine(FiringRoutine());
-            }
-        }
-
-        private IEnumerator FiringRoutine()
-        {
-            while (true)
-            {
-                Debug.Log("Fire");
-                yield return new WaitForSeconds(_fireInterval);
-            }
+            // fire weapon
+            _weapon.StartFiring(direction);
         }
 
         // direction set (input and enemy targeting)
