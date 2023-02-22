@@ -3,9 +3,9 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Assets.Scripts.Collisions
+namespace Assets.Scripts.UniversalComponents
 {
-    public class EnterTriggerEffect : MonoBehaviour
+    public class EnterTriggerComponent : MonoBehaviour
     {
         [SerializeField] private LayerMask _layer = ~0;
         [SerializeField] private EnterEvent _action;

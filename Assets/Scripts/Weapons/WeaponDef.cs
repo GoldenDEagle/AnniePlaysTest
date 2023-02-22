@@ -12,14 +12,12 @@ namespace Assets.Scripts.Weapons
         [SerializeField] private int _damage;
         [SerializeField] private float _shotInterval;
         [SerializeField] private float _projectileSpeed;
-        [SerializeField] private Projectile _projectilePrefab;
 
         public string Name => _name;
         public WeaponId Id => _id;
         public int Damage => _damage;
         public float ShotInterval => _shotInterval;
         public float ProjectileSpeed => _projectileSpeed;
-        public Projectile ProjectilePrefab => _projectilePrefab;
     }
 
     public enum WeaponId

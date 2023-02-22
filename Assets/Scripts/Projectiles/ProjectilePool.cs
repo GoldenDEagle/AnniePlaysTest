@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Pool;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Assets.Scripts.Projectiles
 {

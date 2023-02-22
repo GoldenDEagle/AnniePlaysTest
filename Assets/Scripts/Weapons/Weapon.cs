@@ -2,8 +2,6 @@
 using Assets.Scripts.Projectiles;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Pool;
-using Zenject;
 
 namespace Assets.Scripts.Weapons
 {
@@ -17,7 +15,6 @@ namespace Assets.Scripts.Weapons
         private Coroutine _coroutine;
         private bool _isFiring;
         private Vector3 _firingDirection;
-        private Projectile _projectilePrefab;
 
         public bool IsFiring => _isFiring;
 
@@ -69,7 +66,6 @@ namespace Assets.Scripts.Weapons
             _damage = weaponDef.Damage;
             _shotInterval = weaponDef.ShotInterval;
             _projectileSpeed = weaponDef.ProjectileSpeed;
-            _projectilePrefab = weaponDef.ProjectilePrefab;
         }
 
         public void SwitchWeapon()

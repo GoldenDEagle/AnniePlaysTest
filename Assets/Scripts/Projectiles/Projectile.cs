@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+﻿using Assets.Scripts.UniversalComponents;
+using UnityEngine;
 using UnityEngine.Pool;
 
 namespace Assets.Scripts.Projectiles
@@ -21,6 +21,14 @@ namespace Assets.Scripts.Projectiles
         {
             _damage = damage;
             _rigidbody.AddForce(direction * speed, ForceMode.Impulse);
+        }
+
+        public void ApplyDamage(GameObject target)
+        {
+            if (target.TryGetComponent(out HealthComponent health))
+            {
+                health.ModifyHealth(-_damage);
+            }
         }
 
         public void SetPool(IObjectPool<Projectile> pool) => _pool = pool;

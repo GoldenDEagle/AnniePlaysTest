@@ -16,6 +16,12 @@ namespace Assets.Scripts.Enemies
         public void Remove(GameObject enemyObject)
         {
             _activeEnemies.Remove(enemyObject);
+
+            // end game if no enemies left
+            if (!_activeEnemies.Any())
+            {
+                Debug.Log("Winner");
+            }
         }
 
         /// <summary>

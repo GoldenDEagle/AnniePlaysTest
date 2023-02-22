@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Player;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.Spawners
@@ -17,9 +16,9 @@ namespace Assets.Scripts.Spawners
             _container = container;
         }
 
-        void Start()
+        void Awake()
         {
-            _container.InstantiatePrefab(_playerPrefab, _playerStartPosition.position, Quaternion.identity, null);
+          //  _container.InstantiatePrefab(_playerPrefab, _playerStartPosition.position, Quaternion.identity, null);
         }
     }
 }

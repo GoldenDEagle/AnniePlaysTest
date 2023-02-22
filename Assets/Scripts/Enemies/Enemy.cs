@@ -1,15 +1,33 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Data;
+using Assets.Scripts.Player;
+using Assets.Scripts.Weapons;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 namespace Assets.Scripts.Enemies
 {
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private float _maxMovementDistance = 1f;
-        [SerializeField] private float _moveInterval = 1f;
+        [SerializeField] private float _shootingDuration = 1f;
+        [SerializeField] private int _coinValue = 1;
+        [SerializeField] private Weapon _weapon;
 
+        private EnemyCounter _enemyCounter;
+        private SessionData _sessionData;
         private NavMeshAgent _agent;
+        private IEnumerator _currentState;
+        private PlayerController _player;
+
+        [Inject]
+        private void Construct(EnemyCounter enemyCounter, SessionData sessionData, PlayerController playerController)
+        {
+            _enemyCounter = enemyCounter;
+            _sessionData = sessionData;
+            _player = playerController;
+        }
 
         private void Awake()
         {
@@ -18,18 +36,47 @@ namespace Assets.Scripts.Enemies
 
         private void Start()
         {
-            StartCoroutine(Moving());
+            StartState(Moving());
+        }
+
+        private void StartState(IEnumerator coroutine)
+        {
+            if (_currentState != null)
+                StopCoroutine(_currentState);
+
+            _currentState = coroutine;
+            StartCoroutine(coroutine);
         }
 
         private IEnumerator Moving()
         {
+            _agent.SetDestination(RandomNavmeshLocation(_maxMovementDistance));
+
             while (true)
             {
-                _agent.SetDestination(RandomNavmeshLocation(_maxMovementDistance));
-                yield return new WaitForSeconds(_moveInterval);
+                if (!_agent.pathPending && _agent.remainingDistance < 0.1f)
+                {
+                    StartState(Shooting());
+                    break;
+                }
+                yield return null;
             }
         }
 
+        private IEnumerator Shooting()
+        {
+            _agent.velocity = Vector3.zero;
+
+            _weapon.StartFiring(transform.forward);
+
+            yield return new WaitForSeconds(_shootingDuration);
+
+            _weapon.StopFiring();
+
+            StartState(Moving());
+        }
+
+        // get random point on navmesh within radius
         public Vector3 RandomNavmeshLocation(float radius)
         {
             Vector3 randomDirection = Random.onUnitSphere * radius;
@@ -45,6 +92,9 @@ namespace Assets.Scripts.Enemies
 
         private void OnDestroy()
         {
+            // add coins and remove from enemy list
+            _sessionData.AddCoins(_coinValue);
+            _enemyCounter.Remove(gameObject);
             StopAllCoroutines();
         }
     }
