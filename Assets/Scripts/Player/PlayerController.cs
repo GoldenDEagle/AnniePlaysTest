@@ -50,7 +50,7 @@ namespace Assets.Scripts.Player
             }
         }
 
-        // if firing => stop
+        // if firing -> stop
         private void StopFiring()
         {
             if (!_weapon.IsFiring)
@@ -98,10 +98,10 @@ namespace Assets.Scripts.Player
             RotatePlayer(new Vector2(direction.x, direction.z));
 
             // fire weapon
-            _weapon.StartFiring(direction);
+            _weapon.StartFiring(transform.forward);
         }
 
-        // direction set (input and enemy targeting)
+        // direction set from input
         public void SetDirection(Vector2 direction)
         {
             _direction = direction;

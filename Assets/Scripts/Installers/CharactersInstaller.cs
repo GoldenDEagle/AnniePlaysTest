@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Enemies;
 using Assets.Scripts.Player;
+using Assets.Scripts.Projectiles;
 using UnityEngine;
 using Zenject;
 

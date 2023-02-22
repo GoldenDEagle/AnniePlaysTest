@@ -6,7 +6,8 @@ namespace Assets.Scripts.Enemies
 {
     public class Enemy : MonoBehaviour
     {
-        [SerializeField] private float _maxMovementDistance;
+        [SerializeField] private float _maxMovementDistance = 1f;
+        [SerializeField] private float _moveInterval = 1f;
 
         private NavMeshAgent _agent;
 
@@ -25,7 +26,7 @@ namespace Assets.Scripts.Enemies
             while (true)
             {
                 _agent.SetDestination(RandomNavmeshLocation(_maxMovementDistance));
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(_moveInterval);
             }
         }
 

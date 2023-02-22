@@ -1,6 +1,9 @@
 ﻿using Assets.Scripts.Data.Definitions;
+using Assets.Scripts.Projectiles;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
+using Zenject;
 
 namespace Assets.Scripts.Weapons
 {
@@ -13,7 +16,8 @@ namespace Assets.Scripts.Weapons
         private float _projectileSpeed;
         private Coroutine _coroutine;
         private bool _isFiring;
-        private Vector2 _firingDirection;
+        private Vector3 _firingDirection;
+        private Projectile _projectilePrefab;
 
         public bool IsFiring => _isFiring;
 
@@ -22,9 +26,9 @@ namespace Assets.Scripts.Weapons
             LoadWeaponParameters(_weaponId);
         }
 
-        public void StartFiring(Vector2 direction)
+        public void StartFiring(Vector3 direction)
         {
-            _firingDirection= direction;
+            _firingDirection = direction;
 
             if (_coroutine != null)
                 return;
@@ -54,7 +58,9 @@ namespace Assets.Scripts.Weapons
 
         private void Fire()
         {
-            Debug.Log($"Fired {_damage} at speed of {_projectileSpeed}");
+            Projectile projectile = ProjectilePool.Instance.Pool.Get();
+            projectile.transform.position = transform.position;
+            projectile.Launch(_firingDirection, _projectileSpeed, _damage);
         }
 
         private void LoadWeaponParameters(WeaponId weaponId)
@@ -63,6 +69,7 @@ namespace Assets.Scripts.Weapons
             _damage = weaponDef.Damage;
             _shotInterval = weaponDef.ShotInterval;
             _projectileSpeed = weaponDef.ProjectileSpeed;
+            _projectilePrefab = weaponDef.ProjectilePrefab;
         }
 
         public void SwitchWeapon()
