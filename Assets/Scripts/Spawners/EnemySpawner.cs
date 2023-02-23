@@ -38,13 +38,11 @@ namespace Assets.Scripts.Spawners
 
         private IEnumerator SpawnRoutine()
         {
-            yield return new WaitForSeconds(1f);
-
             foreach (var marker in _enemyMarkers)
             {
+                yield return new WaitForSeconds(_spawnInterval);
                 var enemy = _enemyFactory.Create(marker.EnemyType, marker.transform.position);
                 _enemyCounter.Add(enemy);
-                yield return new WaitForSeconds(_spawnInterval);
             }
 
             _gameStateHandler.SwitchState(GameState.Countdown);

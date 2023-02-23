@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using UnityEngine.SceneManagement;
+using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.Data
 {
@@ -11,6 +14,15 @@ namespace Assets.Scripts.Data
         public Action OnSpawnEnemies;
         public Action OnStartCoundown;
         public Action OnStartGame;
+        public Action OnLevelCleared;
+
+        private SessionData _sessionData;
+
+        [Inject]
+        private GameStateHandler(SessionData sessionData)
+        {
+            _sessionData = sessionData;
+        }
 
         public void SwitchState(GameState newState)
         {
@@ -19,6 +31,7 @@ namespace Assets.Scripts.Data
                 case GameState.MainMenu:
                     break;
                 case GameState.SpawnPlayer:
+                    _sessionData.ClearCoins();
                     SceneManager.LoadScene("Game");
                     break;
                 case GameState.SpawnEnemies:
@@ -31,12 +44,15 @@ namespace Assets.Scripts.Data
                     OnStartGame?.Invoke();
                     break;
                 case GameState.PostGame:
+                    OnLevelCleared?.Invoke();
                     break;
                 case GameState.Pause:
                     break;
                 default:
                     break;
             }
+
+            _state = newState;
         }
     }
 

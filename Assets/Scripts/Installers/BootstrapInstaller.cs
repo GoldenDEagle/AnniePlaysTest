@@ -12,8 +12,8 @@ namespace Assets.Scripts.Installers
         {
             BindInstallerInterfaces();
             BindEventHandler();
-            BindGameStatesHandler();
             BindSessionData();
+            BindGameStatesHandler();
         }
 
         private void BindInstallerInterfaces()

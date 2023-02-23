@@ -20,21 +20,24 @@ namespace Assets.Scripts.Enemies
         private NavMeshAgent _agent;
         private IEnumerator _currentState;
         private PlayerController _player;
+        private GameStateHandler _gameStateHandler;
 
         [Inject]
-        private void Construct(EnemyCounter enemyCounter, SessionData sessionData, PlayerController playerController)
+        private void Construct(EnemyCounter enemyCounter, SessionData sessionData, PlayerController playerController, GameStateHandler gameStateHandler)
         {
             _enemyCounter = enemyCounter;
             _sessionData = sessionData;
             _player = playerController;
+            _gameStateHandler = gameStateHandler;
         }
 
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
+            _gameStateHandler.OnStartGame += OnGameStarted;
         }
 
-        private void Start()
+        private void OnGameStarted()
         {
             StartState(Moving());
         }
@@ -105,6 +108,8 @@ namespace Assets.Scripts.Enemies
 
         private void OnDestroy()
         {
+            _gameStateHandler.OnStartGame -= OnGameStarted;
+
             // add coins and remove from enemy list
             _sessionData.AddCoins(_coinValue);
             _enemyCounter.Remove(gameObject);

@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Data.Events;
-using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Assets.Scripts.Data
@@ -21,6 +20,11 @@ namespace Assets.Scripts.Data
         {
             _coins += coinsToAdd;
             _eventHandler.UpdateCoins();
+        }
+
+        public void ClearCoins()
+        {
+            _coins = 0;
         }
     }
 }

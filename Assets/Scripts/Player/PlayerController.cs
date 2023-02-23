@@ -43,6 +43,8 @@ namespace Assets.Scripts.Player
 
         private void FixedUpdate()
         {
+            if (!(_gameStateHandler.State == GameState.Gameplay || _gameStateHandler.State == GameState.PostGame)) return;
+
             CheckMovementStatus();
 
             if (_isMoving)
@@ -54,6 +56,7 @@ namespace Assets.Scripts.Player
             }
             else
             {
+                if (_gameStateHandler.State != GameState.Gameplay) return;
                 LockOnTarget();
             }
         }

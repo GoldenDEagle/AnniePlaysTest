@@ -1,12 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.Data;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.Enemies
 {
     public class EnemyCounter
     {
         private List<GameObject> _activeEnemies = new List<GameObject>();
+
+        private GameStateHandler _gameStateHandler;
+
+        [Inject]
+        private EnemyCounter(GameStateHandler gameStateHandler)
+        {
+            _gameStateHandler = gameStateHandler;
+        }
 
         public void Add(GameObject enemyObject)
         {
@@ -20,7 +30,7 @@ namespace Assets.Scripts.Enemies
             // end game if no enemies left
             if (!_activeEnemies.Any())
             {
-                Debug.Log("Winner");
+                _gameStateHandler.SwitchState(GameState.PostGame);
             }
         }
 
