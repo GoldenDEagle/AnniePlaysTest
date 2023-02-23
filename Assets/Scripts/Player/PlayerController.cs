@@ -1,3 +1,4 @@
+using Assets.Scripts.Data;
 using Assets.Scripts.Data.Definitions;
 using Assets.Scripts.Enemies;
 using Assets.Scripts.Weapons;
@@ -17,20 +18,27 @@ namespace Assets.Scripts.Player
         // references
         private CharacterController _characterController;
         private EnemyCounter _enemyCounter;
+        private GameStateHandler _gameStateHandler;
 
         // internal variables
         private Vector2 _direction;
         private bool _isMoving;
 
         [Inject]
-        private void Construct(EnemyCounter enemyCounter)
+        private void Construct(EnemyCounter enemyCounter, GameStateHandler gameStateHandler)
         {
             _enemyCounter = enemyCounter;
+            _gameStateHandler = gameStateHandler;
         }
 
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
+        }
+
+        private void Start()
+        {
+            _gameStateHandler.SwitchState(GameState.SpawnEnemies);
         }
 
         private void FixedUpdate()

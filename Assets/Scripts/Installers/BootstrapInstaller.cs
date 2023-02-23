@@ -10,16 +10,22 @@ namespace Assets.Scripts.Installers
     {
         public override void InstallBindings()
         {
-            BindInterfaces();
+            BindInstallerInterfaces();
             BindEventHandler();
+            BindGameStatesHandler();
             BindSessionData();
         }
 
-        private void BindInterfaces()
+        private void BindInstallerInterfaces()
         {
             Container.BindInterfacesTo<BootstrapInstaller>()
                 .FromInstance(this)
                 .AsSingle();
+        }
+
+        private void BindGameStatesHandler()
+        {
+            Container.Bind<GameStateHandler>().AsSingle().NonLazy();
         }
 
         private void BindSessionData()
@@ -34,7 +40,7 @@ namespace Assets.Scripts.Installers
 
         public void Initialize()
         {
-            SceneManager.LoadSceneAsync("MainMenu");
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }

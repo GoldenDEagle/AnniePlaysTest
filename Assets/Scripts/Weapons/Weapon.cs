@@ -18,7 +18,7 @@ namespace Assets.Scripts.Weapons
 
         public bool IsFiring => _isFiring;
 
-        private void Awake()
+        private void Start()
         {
             LoadWeaponParameters(_weaponId);
         }

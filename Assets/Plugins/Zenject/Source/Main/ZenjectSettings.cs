@@ -45,7 +45,7 @@ namespace Zenject
 #if !NOT_UNITY3D
         [SerializeField]
 #endif
-        bool _displayWarningWhenResolvingDuringInstall;
+        bool _displayWarningWhenResolvingDuringInstall = false;
 
 #if !NOT_UNITY3D
         [SerializeField]
@@ -65,13 +65,13 @@ namespace Zenject
         public ZenjectSettings(
             ValidationErrorResponses validationErrorResponse,
             RootResolveMethods validationRootResolveMethod = RootResolveMethods.NonLazyOnly,
-            bool displayWarningWhenResolvingDuringInstall = true,
+            bool displayWarningWhenResolvingDuringInstall = false,
             bool ensureDeterministicDestructionOrderOnApplicationQuit = false,
             SignalSettings signalSettings = null)
         {
             _validationErrorResponse = validationErrorResponse;
             _validationRootResolveMethod = validationRootResolveMethod;
-            _displayWarningWhenResolvingDuringInstall = displayWarningWhenResolvingDuringInstall;
+            _displayWarningWhenResolvingDuringInstall = false;
             _ensureDeterministicDestructionOrderOnApplicationQuit =ensureDeterministicDestructionOrderOnApplicationQuit;
             _signalSettings = signalSettings ?? SignalSettings.Default;
         }
@@ -106,7 +106,7 @@ namespace Zenject
 
         public bool DisplayWarningWhenResolvingDuringInstall
         {
-            get { return _displayWarningWhenResolvingDuringInstall; }
+            get { return false; }
         }
 
         // When this is set to true and the application is exitted, all the scenes will be

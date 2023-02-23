@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Data;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Assets.Scripts.UI
 {
@@ -8,9 +10,17 @@ namespace Assets.Scripts.UI
     {
         [SerializeField] private Button _startButton;
 
+        private GameStateHandler _gameStateHandler;
+
+        [Inject]
+        private void Construct(GameStateHandler gameStateHandler)
+        {
+            _gameStateHandler = gameStateHandler;
+        }
+
         public void OnStartClicked()
         {
-            SceneManager.LoadScene("Game");
+            _gameStateHandler.SwitchState(GameState.SpawnPlayer);
         }
     }
 }
