@@ -50,6 +50,7 @@ namespace Assets.Scripts.Enemies
 
         private IEnumerator Moving()
         {
+            _agent.updateRotation = true;
             _agent.SetDestination(RandomNavmeshLocation(_maxMovementDistance));
 
             while (true)
@@ -67,6 +68,8 @@ namespace Assets.Scripts.Enemies
         {
             _agent.velocity = Vector3.zero;
 
+            RotateTowardsPlayer();
+
             _weapon.StartFiring(transform.forward);
 
             yield return new WaitForSeconds(_shootingDuration);
@@ -74,6 +77,16 @@ namespace Assets.Scripts.Enemies
             _weapon.StopFiring();
 
             StartState(Moving());
+        }
+
+        private void RotateTowardsPlayer()
+        {
+            _agent.updateRotation = false;
+            var direction = (_player.transform.position - transform.position).normalized;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
+
+            transform.rotation = rotation;
         }
 
         // get random point on navmesh within radius
@@ -95,7 +108,6 @@ namespace Assets.Scripts.Enemies
             // add coins and remove from enemy list
             _sessionData.AddCoins(_coinValue);
             _enemyCounter.Remove(gameObject);
-            StopAllCoroutines();
         }
     }
 }

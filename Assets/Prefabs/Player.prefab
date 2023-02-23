@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpeed: 2
-  _rotationSpeed: 6
+  _rotationSpeed: 10
   _weapon: {fileID: 2084364650}
 --- !u!114 &8080121948569377132
 MonoBehaviour:

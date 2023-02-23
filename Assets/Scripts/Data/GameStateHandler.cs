@@ -2,8 +2,11 @@
 
 namespace Assets.Scripts.Data
 {
-    public class GameStateManager
+    public class GameStateHandler
     {
+        private GameState _state;
+        public GameState State => _state;
+
         public Action OnStateChanged;
 
         public void SwitchState(GameState newState)

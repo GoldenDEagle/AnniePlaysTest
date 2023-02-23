@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxMovementDistance: 4
   _shootingDuration: 1
+  _rotationSpeed: 6
   _coinValue: 1
   _weapon: {fileID: 0}
 --- !u!114 &3121482235073298779

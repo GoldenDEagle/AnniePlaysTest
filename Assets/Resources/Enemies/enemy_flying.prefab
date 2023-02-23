@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxMovementDistance: 5
   _shootingDuration: 2
-  _coinValue: 1
+  _coinValue: 2
   _weapon: {fileID: 6662708715786587722}
 --- !u!135 &7199455752546545787
 SphereCollider:

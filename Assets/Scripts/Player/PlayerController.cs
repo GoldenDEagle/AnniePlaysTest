@@ -98,7 +98,7 @@ namespace Assets.Scripts.Player
             RotatePlayer(new Vector2(direction.x, direction.z));
 
             // fire weapon
-            _weapon.StartFiring(transform.forward);
+            _weapon.StartFiring(direction);
         }
 
         // direction set from input
