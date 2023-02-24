@@ -3,6 +3,8 @@ using UnityEngine;
 
 namespace Assets.Scripts.Data.Definitions
 {
+    // collection of possible weapons
+
     [CreateAssetMenu(menuName = "Defs/WeaponDescriptions", fileName = "Weapons")]
     public class WeaponDescriptions : ScriptableObject
     {

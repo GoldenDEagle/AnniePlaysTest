@@ -1,11 +1,11 @@
 ﻿using Assets.Scripts.Data;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Assets.Scripts.LevelManagement
 {
+    // used if GO needs to load a scene
     public class SceneTransitionComponent : MonoBehaviour
     {
         [SerializeField] private string _sceneName;

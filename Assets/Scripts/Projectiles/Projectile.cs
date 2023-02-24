@@ -17,6 +17,7 @@ namespace Assets.Scripts.Projectiles
             _rigidbody = GetComponent<Rigidbody>();
         }
 
+        // called every time projectile activates
         public void Launch(Vector3 direction, float speed, int damage)
         {
             _damage = damage;
@@ -31,6 +32,7 @@ namespace Assets.Scripts.Projectiles
             }
         }
 
+        // bind instance to pool
         public void SetPool(IObjectPool<Projectile> pool) => _pool = pool;
 
         public void OnPoolRelease()

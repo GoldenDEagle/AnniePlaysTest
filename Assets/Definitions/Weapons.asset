@@ -16,14 +16,10 @@ MonoBehaviour:
   - _name: Machine Gun
     _id: 0
     _damage: 1
-    _shotInterval: 0.5
-    _projectileSpeed: 6
-    _projectilePrefab: {fileID: 8425180471730543713, guid: 597bb37e52490f44eb611c84483773eb,
-      type: 3}
+    _shotInterval: 0.25
+    _projectileSpeed: 8
   - _name: Missile Launcher
     _id: 1
     _damage: 3
-    _shotInterval: 1
-    _projectileSpeed: 3
-    _projectilePrefab: {fileID: 8425180471730543713, guid: 597bb37e52490f44eb611c84483773eb,
-      type: 3}
+    _shotInterval: 0.75
+    _projectileSpeed: 4

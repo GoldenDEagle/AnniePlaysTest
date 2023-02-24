@@ -6,6 +6,7 @@ namespace Assets.Scripts.UniversalComponents
     public class HealthComponent : MonoBehaviour
     {
         [SerializeField] private int _health;
+
         [SerializeField] public UnityEvent _onDamage;
         [SerializeField] public UnityEvent _onDie;
 

@@ -110,10 +110,11 @@ GameObject:
   - component: {fileID: 3403998650354575311}
   - component: {fileID: 3403998650354575296}
   - component: {fileID: 3403998650354575310}
-  - component: {fileID: 3403998650354575305}
-  - component: {fileID: 3403998650354575299}
   - component: {fileID: 3403998650354575298}
   - component: {fileID: 8080121948569377132}
+  - component: {fileID: 3472064214049894706}
+  - component: {fileID: 7372301159865326191}
+  - component: {fileID: 1067204781854304789}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -214,7 +215,54 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!143 &3403998650354575305
+--- !u!114 &3403998650354575298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3403998650354575304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e218e069ebfff584eab88edec0eca490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerSpeed: 2
+  _rotationSpeed: 10
+  _weapon: {fileID: 2084364650}
+--- !u!114 &8080121948569377132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3403998650354575304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ff746adbb783b41be8ecc33043740d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 5
+  _onDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  _onDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1067204781854304789}
+        m_TargetAssemblyTypeName: Assets.Scripts.UniversalComponents.ShowWindowComponent,
+          Assembly-CSharp
+        m_MethodName: Show
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!143 &3472064214049894706
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,9 +278,9 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3403998650354575299
+--- !u!114 &7372301159865326191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -272,58 +320,46 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 4351b17e-fa1a-47b3-80a6-73a1c0e787c3
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+    m_ActionId: e22714ff-1168-4276-8dca-879b5c86141b
+    m_ActionName: ActionMap/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: be309918-e17c-4a2b-af94-f97e6a2046dc
-    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+      m_Calls:
+      - m_Target: {fileID: 3403998650354575296}
+        m_TargetAssemblyTypeName: Assets.Scripts.Player.PlayerInputReader, Assembly-CSharp
+        m_MethodName: OnWeaponSwitch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fd265cea-09a1-4dea-8729-b7c0c543fd46
+    m_ActionName: ActionMap/SwitchWeapon[/Keyboard/q]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a2aa8453-b3ab-4d0b-bbe8-060f128cd292
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e51e511c-88bb-4dae-9587-4f6a18675175
-    m_ActionName: UI/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d79cf326-5334-48ae-aa5a-b5da15040841
-    m_ActionName: UI/Point[/Mouse/position]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a40705af-c1b8-4530-b3cf-3f6d95c28270
-    m_ActionName: UI/Click[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c6dab924-d1b1-4e38-af9f-ea9a17f178d3
-    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4f7723e2-6ffb-4294-a67d-df6f8fd834c8
-    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: dcd808fd-71cd-48d8-be6c-13a8e3d995c7
-    m_ActionName: UI/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b892311e-3bcc-4393-893a-e42d27e8d8fd
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 185c681b-5301-48b6-95a6-e44c9dba1127
-    m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 67397437-b368-43b1-af70-eace4dbf21f9
-    m_ActionName: Player/SwitchWeapon[/Keyboard/q]
+      m_Calls:
+      - m_Target: {fileID: 3403998650354575296}
+        m_TargetAssemblyTypeName: Assets.Scripts.Player.PlayerInputReader, Assembly-CSharp
+        m_MethodName: OnPausePressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3336dd32-5a7a-4c9f-b9a0-529a7ec5a356
+    m_ActionName: ActionMap/Pause[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: ActionMap
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3403998650354575298
+--- !u!114 &1067204781854304789
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -332,31 +368,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3403998650354575304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e218e069ebfff584eab88edec0eca490, type: 3}
+  m_Script: {fileID: 11500000, guid: 73bd1fbb09456ab489e78010d50969a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSpeed: 2
-  _rotationSpeed: 10
-  _weapon: {fileID: 2084364650}
---- !u!114 &8080121948569377132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3403998650354575304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55ff746adbb783b41be8ecc33043740d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 5
-  _onDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  _onDie:
-    m_PersistentCalls:
-      m_Calls: []
+  _path: EndGameWindow
 --- !u!1 &3403998650829215048
 GameObject:
   m_ObjectHideFlags: 0

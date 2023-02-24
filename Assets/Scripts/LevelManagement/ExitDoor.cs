@@ -18,7 +18,8 @@ namespace Assets.Scripts.LevelManagement
         {
             _gameStateHandler.OnLevelCleared += OpenDoor;
         }
-
+        
+        // called when level cleared
         private void OpenDoor()
         {
             Destroy(gameObject);

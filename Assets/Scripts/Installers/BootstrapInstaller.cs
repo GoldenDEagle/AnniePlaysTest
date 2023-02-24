@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Data;
 using Assets.Scripts.Data.Events;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 

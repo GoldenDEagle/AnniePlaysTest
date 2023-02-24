@@ -23,17 +23,16 @@ namespace Assets.Scripts.Projectiles
                 Instance = this;
             }
 
-            _pool = new ObjectPool<Projectile>(SpawnTarget, OnPoolGet, OnPoolRelease, OnPoolDestroy);
+            _pool = new ObjectPool<Projectile>(SpawnProjectile, OnPoolGet, OnPoolRelease, OnPoolDestroy);
         }
 
-        private Projectile SpawnTarget()
+        private Projectile SpawnProjectile()
         {
             Projectile projectile = Instantiate(_projectilePrefab);
             projectile.SetPool(_pool);
             return projectile;
         }
 
-        // pooling
         private void OnPoolGet(Projectile projectile)
         {
             projectile.gameObject.SetActive(true);

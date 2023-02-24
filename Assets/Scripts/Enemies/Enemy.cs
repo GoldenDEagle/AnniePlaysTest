@@ -8,12 +8,15 @@ using Zenject;
 
 namespace Assets.Scripts.Enemies
 {
+    [RequireComponent(typeof(NavMeshAgent))]
     public class Enemy : MonoBehaviour
     {
+        [Header("Parameters")]
         [SerializeField] private float _maxMovementDistance = 1f;
         [SerializeField] private float _shootingDuration = 1f;
         [SerializeField] private int _coinValue = 1;
-        [SerializeField] private Weapon _weapon;
+        [Header("Weapon")]
+        [SerializeField] private IWeapon _weapon;
 
         private EnemyCounter _enemyCounter;
         private SessionData _sessionData;
@@ -42,6 +45,7 @@ namespace Assets.Scripts.Enemies
             StartState(Moving());
         }
 
+        // call to change state
         private void StartState(IEnumerator coroutine)
         {
             if (_currentState != null)

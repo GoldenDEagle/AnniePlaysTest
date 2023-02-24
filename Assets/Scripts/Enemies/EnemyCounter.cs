@@ -6,6 +6,8 @@ using Zenject;
 
 namespace Assets.Scripts.Enemies
 {
+    // holds list of active enemies
+
     public class EnemyCounter
     {
         private List<GameObject> _activeEnemies = new List<GameObject>();

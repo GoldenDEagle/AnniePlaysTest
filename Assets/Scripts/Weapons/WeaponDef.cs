@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Projectiles;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons

@@ -8,7 +8,9 @@ namespace Assets.Scripts.Spawners
 {
     public class EnemySpawner : MonoBehaviour
     {
+        [Tooltip("Time between enemies spawn")]
         [SerializeField] private float _spawnInterval = 1f;
+        [Header("Enemies to spawn")]
         [SerializeField] private EnemyMarker[] _enemyMarkers;
 
         private EnemyFactory _enemyFactory;

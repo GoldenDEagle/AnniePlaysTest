@@ -43,10 +43,4 @@ namespace Assets.Scripts.Enemies
             return spawned;
         }
     }
-
-    public enum EnemyType
-    {
-        Ground = 0,
-        Flying = 1
-    }
 }

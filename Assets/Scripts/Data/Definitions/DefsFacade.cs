@@ -2,6 +2,8 @@
 
 namespace Assets.Scripts.Data.Definitions
 {
+    // defenitions load from resources and hold them
+
     [CreateAssetMenu(menuName = "Defs/DefsFacade", fileName = "DefsFacade")]
     public class DefsFacade : ScriptableObject
     {

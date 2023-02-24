@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Data.Definitions;
 using Assets.Scripts.Projectiles;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +9,9 @@ namespace Assets.Scripts.Weapons
     public class Weapon : MonoBehaviour
     {
         [SerializeField] private WeaponId _weaponId;
+
+        // number of available weapons
+        private int _numOfWeapons = Enum.GetNames(typeof(WeaponId)).Length;
 
         private int _damage;
         private float _shotInterval;
@@ -53,6 +57,7 @@ namespace Assets.Scripts.Weapons
             }
         }
 
+        // launch single projectile
         private void Fire()
         {
             Projectile projectile = ProjectilePool.Instance.Pool.Get();
@@ -60,6 +65,7 @@ namespace Assets.Scripts.Weapons
             projectile.Launch(_firingDirection, _projectileSpeed, _damage);
         }
 
+        // get definition from scriptable object
         private void LoadWeaponParameters(WeaponId weaponId)
         {
             WeaponDef weaponDef = DefsFacade.I.Weapons.Get(weaponId);
@@ -71,6 +77,11 @@ namespace Assets.Scripts.Weapons
         public void SwitchWeapon()
         {
             _weaponId += 1;
+            if ((int) _weaponId >= _numOfWeapons)
+            {
+                _weaponId = 0;
+            }
+
             LoadWeaponParameters(_weaponId);
         }
     }

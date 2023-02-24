@@ -8,9 +8,11 @@ namespace Assets.Scripts.UI
 {
     public class CountDown : MonoBehaviour
     {
-        private const string GoText = "Go!";
+        [Tooltip("Seconds until start")]
         [SerializeField] private int _secondsToStart = 3;
         [SerializeField] private TextMeshProUGUI _text;
+
+        private const string GoText = "Go!";
 
         private int _counter;
 
@@ -36,6 +38,7 @@ namespace Assets.Scripts.UI
 
         private IEnumerator Counting()
         {
+            // update every second
             while (_counter > 0)
             {
                 yield return new WaitForSeconds(1f);
@@ -43,6 +46,7 @@ namespace Assets.Scripts.UI
                 UpdateCount();
             }
 
+            // final message
             _text.text = GoText;
             yield return new WaitForSeconds(0.5f);
 

@@ -7,14 +7,15 @@ namespace Assets.Scripts.UniversalComponents
 {
     public class EnterTriggerComponent : MonoBehaviour
     {
+        [Tooltip("Target layers")]
         [SerializeField] private LayerMask _layer = ~0;
-        [SerializeField] private EnterEvent _action;
+        [SerializeField] private EnterEvent _onEnterAction;
 
         private void OnTriggerEnter(Collider other)
         {
             if (!other.gameObject.IsInLayer(_layer)) return;
 
-            _action?.Invoke(other.gameObject);
+            _onEnterAction?.Invoke(other.gameObject);
         }
 
         [Serializable]

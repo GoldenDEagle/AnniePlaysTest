@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using UnityEngine.SceneManagement;
-using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.Data
 {
+    // keeps game state and notifies on change
+
     public class GameStateHandler
     {
         private GameState _state = GameState.MainMenu;

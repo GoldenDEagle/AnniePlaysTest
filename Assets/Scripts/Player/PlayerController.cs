@@ -1,26 +1,23 @@
 using Assets.Scripts.Data;
-using Assets.Scripts.Data.Definitions;
 using Assets.Scripts.Enemies;
 using Assets.Scripts.Weapons;
-using System.Collections;
 using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.Player
 {
+    [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
-        // parameters
+        [Header("Parameters")]
         [SerializeField] private float _playerSpeed = 2.0f;
         [SerializeField] private float _rotationSpeed = 4f;
         [SerializeField] private Weapon _weapon;
 
-        // references
         private CharacterController _characterController;
         private EnemyCounter _enemyCounter;
         private GameStateHandler _gameStateHandler;
 
-        // internal variables
         private Vector2 _direction;
         private bool _isMoving;
 
@@ -41,7 +38,7 @@ namespace Assets.Scripts.Player
             _gameStateHandler.SwitchState(GameState.SpawnEnemies);
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (!(_gameStateHandler.State == GameState.Gameplay || _gameStateHandler.State == GameState.PostGame)) return;
 
@@ -72,7 +69,7 @@ namespace Assets.Scripts.Player
 
         private void CheckMovementStatus()
         {
-            if (_direction != Vector2.zero)
+            if (_direction.magnitude > 0.01f)
             {
                 _isMoving = true;
             }
@@ -87,10 +84,10 @@ namespace Assets.Scripts.Player
         {
             Vector3 move = new Vector3(_direction.x, 0, _direction.y);
 
-            _characterController.Move(move * Time.deltaTime * _playerSpeed);
+            _characterController.Move(move * _playerSpeed * Time.deltaTime);
         }
 
-        // rotation depending on direction
+        // rotation in direction
         private void RotatePlayer(Vector2 rotationDirection)
         {
             if (rotationDirection != Vector2.zero)
@@ -102,7 +99,7 @@ namespace Assets.Scripts.Player
         }
 
         private void LockOnTarget()
-        {
+        { 
             // find and rotate towards nearest enemy
             var enemy = _enemyCounter.FindClosestEnemy(transform.position);
             var direction = (enemy.transform.position - transform.position).normalized;
@@ -116,6 +113,11 @@ namespace Assets.Scripts.Player
         public void SetDirection(Vector2 direction)
         {
             _direction = direction;
+        }
+
+        public void SwitchWeapon()
+        {
+            _weapon.SwitchWeapon();
         }
     }
 }
