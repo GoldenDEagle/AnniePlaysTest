@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7199455752546545787}
   - component: {fileID: -7950026255047248921}
   - component: {fileID: 5308604552119881568}
+  - component: {fileID: 8759668549849445954}
   m_Layer: 6
   m_Name: enemy_flying
   m_TagString: Untagged
@@ -128,6 +129,7 @@ MonoBehaviour:
   _shootingDuration: 2
   _coinValue: 2
   _weapon: {fileID: 6662708715786587722}
+  _mover: {fileID: 8759668549849445954}
 --- !u!135 &7199455752546545787
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -186,6 +188,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectToDestroy: {fileID: 567064301738299273}
+--- !u!114 &8759668549849445954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567064301738299273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51c32c529a5a8b44aececfc1036775a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxMovementDistance: 5
 --- !u!1 &7158349809593435171
 GameObject:
   m_ObjectHideFlags: 0

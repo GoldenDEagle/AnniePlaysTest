@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Enemies;
+using Assets.Scripts.Enemies.Movement;
 using Assets.Scripts.Player;
 using UnityEngine;
 using Zenject;

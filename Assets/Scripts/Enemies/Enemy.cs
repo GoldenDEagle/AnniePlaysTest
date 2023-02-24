@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Data;
+using Assets.Scripts.Enemies.Movement;
 using Assets.Scripts.Player;
 using Assets.Scripts.Weapons;
 using System.Collections;
@@ -12,11 +13,12 @@ namespace Assets.Scripts.Enemies
     public class Enemy : MonoBehaviour
     {
         [Header("Parameters")]
-        [SerializeField] private float _maxMovementDistance = 1f;
         [SerializeField] private float _shootingDuration = 1f;
         [SerializeField] private int _coinValue = 1;
         [Header("Weapon")]
         [SerializeField] private Weapon _weapon;
+        [Header("Movement script")]
+        [SerializeField] private MovementBase _mover;
 
         private EnemyCounter _enemyCounter;
         private SessionData _sessionData;
@@ -25,9 +27,10 @@ namespace Assets.Scripts.Enemies
         private PlayerController _player;
         private GameStateHandler _gameStateHandler;
 
+
         [Inject]
         private void Construct(EnemyCounter enemyCounter, SessionData sessionData, PlayerController playerController, GameStateHandler gameStateHandler)
-        {
+        { 
             _enemyCounter = enemyCounter;
             _sessionData = sessionData;
             _player = playerController;
@@ -38,11 +41,12 @@ namespace Assets.Scripts.Enemies
         {
             _agent = GetComponent<NavMeshAgent>();
             _gameStateHandler.OnStartGame += OnGameStarted;
+            _mover.OnMovementFinished += BeginShooting;
         }
 
         private void OnGameStarted()
         {
-            StartState(Moving());
+            StartState(_mover.Moving());
         }
 
         // call to change state
@@ -55,20 +59,9 @@ namespace Assets.Scripts.Enemies
             StartCoroutine(coroutine);
         }
 
-        private IEnumerator Moving()
+        private void BeginShooting()
         {
-            _agent.updateRotation = true;
-            _agent.SetDestination(RandomNavmeshLocation(_maxMovementDistance));
-
-            while (true)
-            {
-                if (!_agent.pathPending && _agent.remainingDistance < 0.1f)
-                {
-                    StartState(Shooting());
-                    break;
-                }
-                yield return null;
-            }
+            StartState(Shooting());
         }
 
         private IEnumerator Shooting()
@@ -83,7 +76,7 @@ namespace Assets.Scripts.Enemies
 
             _weapon.StopFiring();
 
-            StartState(Moving());
+            StartState(_mover.Moving());
         }
 
         private void RotateTowardsPlayer()
@@ -96,23 +89,11 @@ namespace Assets.Scripts.Enemies
             transform.rotation = rotation;
         }
 
-        // get random point on navmesh within radius
-        public Vector3 RandomNavmeshLocation(float radius)
-        {
-            Vector3 randomDirection = Random.onUnitSphere * radius;
-            randomDirection.y = 0f;
-            randomDirection += transform.position;
-            Vector3 finalPosition = Vector3.zero;
-            if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, radius, 1))
-            {
-                finalPosition = hit.position;
-            }
-            return finalPosition;
-        }
 
         private void OnDestroy()
         {
             _gameStateHandler.OnStartGame -= OnGameStarted;
+            _mover.OnMovementFinished += BeginShooting;
 
             // add coins and remove from enemy list
             _sessionData.AddCoins(_coinValue);

@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Data;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
@@ -21,6 +20,15 @@ namespace Assets.Scripts.UI
         public void OnStartClicked()
         {
             _gameStateHandler.SwitchState(GameState.SpawnPlayer);
+        }
+
+        public void OnExitClicked()
+        {
+            Application.Quit();
+
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
         }
     }
 }
