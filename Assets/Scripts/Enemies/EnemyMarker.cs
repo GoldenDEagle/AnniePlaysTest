@@ -13,7 +13,7 @@ namespace Assets.Scripts.Enemies
 
         private void Awake()
         {
-            if (!_randomizeposition)
+            if (_randomizeposition)
             {
                 var xPosition = Random.Range(-_xSpawnBorder, _xSpawnBorder);
                 var zPosition = Random.Range(-_zSpawnBorder, _zSpawnBorder);

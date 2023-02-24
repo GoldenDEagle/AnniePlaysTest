@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Weapons
 {
-    public class Weapon : MonoBehaviour
+    public class Weapon : MonoBehaviour, IWeapon
     {
         [SerializeField] private WeaponId _weaponId;
 

@@ -18,6 +18,7 @@ namespace Assets.Scripts.Player
         private EnemyCounter _enemyCounter;
         private GameStateHandler _gameStateHandler;
 
+        private float _defaultYPosition;
         private Vector2 _direction;
         private bool _isMoving;
 
@@ -36,6 +37,7 @@ namespace Assets.Scripts.Player
         private void Start()
         {
             _gameStateHandler.SwitchState(GameState.SpawnEnemies);
+            _defaultYPosition = transform.position.y;
         }
 
         private void Update()
@@ -56,6 +58,8 @@ namespace Assets.Scripts.Player
                 if (_gameStateHandler.State != GameState.Gameplay) return;
                 LockOnTarget();
             }
+
+            transform.position = new Vector3(transform.position.x, _defaultYPosition, transform.position.z);
         }
 
         // if firing -> stop

@@ -144,7 +144,7 @@ MonoBehaviour:
   _layer:
     serializedVersion: 2
     m_Bits: 72
-  _action:
+  _onEnterAction:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8425180471730543713}
@@ -186,7 +186,7 @@ MonoBehaviour:
   _layer:
     serializedVersion: 2
     m_Bits: 128
-  _action:
+  _onEnterAction:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8425180471730543713}

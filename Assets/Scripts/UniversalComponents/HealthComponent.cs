@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Assets.Scripts.UniversalComponents
@@ -9,6 +10,8 @@ namespace Assets.Scripts.UniversalComponents
 
         [SerializeField] public UnityEvent _onDamage;
         [SerializeField] public UnityEvent _onDie;
+        
+        public event Action<int> OnHpChanged;
 
         public int Health => _health;
 
@@ -17,6 +20,8 @@ namespace Assets.Scripts.UniversalComponents
             if (_health <= 0) return;
 
             _health += healthDelta;
+
+            OnHpChanged?.Invoke(_health);
 
             if (healthDelta < 0)
             {

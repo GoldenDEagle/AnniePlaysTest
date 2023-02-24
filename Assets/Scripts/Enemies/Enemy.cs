@@ -16,7 +16,7 @@ namespace Assets.Scripts.Enemies
         [SerializeField] private float _shootingDuration = 1f;
         [SerializeField] private int _coinValue = 1;
         [Header("Weapon")]
-        [SerializeField] private IWeapon _weapon;
+        [SerializeField] private Weapon _weapon;
 
         private EnemyCounter _enemyCounter;
         private SessionData _sessionData;
