@@ -16,18 +16,21 @@ namespace Assets.Scripts.LevelManagement
 
         private void Start()
         {
-            _gameStateHandler.OnLevelCleared += OpenDoor;
+            _gameStateHandler.OnAfterStateEnter += OpenDoor;
         }
         
         // called when level cleared
-        private void OpenDoor()
+        private void OpenDoor(GameState gameState)
         {
+            if (gameState != GameState.PostGame)
+                return;
+
             Destroy(gameObject);
         }
 
         private void OnDestroy()
         {
-            _gameStateHandler.OnLevelCleared -= OpenDoor;
+            _gameStateHandler.OnAfterStateEnter -= OpenDoor;
         }
     }
 }

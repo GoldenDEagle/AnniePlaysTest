@@ -26,12 +26,15 @@ namespace Assets.Scripts.UI
 
         private void Awake()
         {
-            _gameStateHandler.OnStartCoundown += Run;
+            _gameStateHandler.OnAfterStateEnter += Run;
             _counter = _secondsToStart;
         }
 
-        private void Run()
+        private void Run(GameState gameState)
         {
+            if (gameState != GameState.Countdown)
+                return;
+
             _text.gameObject.SetActive(true);
             StartCoroutine(Counting());
         }
@@ -61,7 +64,7 @@ namespace Assets.Scripts.UI
 
         private void OnDisable()
         {
-            _gameStateHandler.OnStartCoundown -= Run;
+            _gameStateHandler.OnAfterStateEnter -= Run;
         }
     }
 }

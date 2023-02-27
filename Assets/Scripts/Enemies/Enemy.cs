@@ -40,12 +40,15 @@ namespace Assets.Scripts.Enemies
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
-            _gameStateHandler.OnStartGame += OnGameStarted;
+            _gameStateHandler.OnAfterStateEnter += OnGameStarted;
             _mover.OnMovementFinished += BeginShooting;
         }
 
-        private void OnGameStarted()
+        private void OnGameStarted(GameState gameState)
         {
+            if (gameState != GameState.Gameplay)
+                return;
+
             StartState(_mover.Moving());
         }
 
@@ -92,7 +95,7 @@ namespace Assets.Scripts.Enemies
 
         private void OnDestroy()
         {
-            _gameStateHandler.OnStartGame -= OnGameStarted;
+            _gameStateHandler.OnAfterStateEnter -= OnGameStarted;
             _mover.OnMovementFinished += BeginShooting;
 
             // add coins and remove from enemy list

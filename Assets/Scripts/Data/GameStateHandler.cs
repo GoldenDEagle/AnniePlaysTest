@@ -11,10 +11,13 @@ namespace Assets.Scripts.Data
         private GameState _state = GameState.MainMenu;
         public GameState State => _state;
 
-        public Action OnSpawnEnemies;
-        public Action OnStartCoundown;
-        public Action OnStartGame;
-        public Action OnLevelCleared;
+        //public Action OnSpawnEnemies;
+        //public Action OnStartCoundown;
+        //public Action OnStartGame;
+        //public Action OnLevelCleared;
+
+        public Action<GameState> OnBeforeStateEnter;
+        public Action<GameState> OnAfterStateEnter;
 
         private SessionData _sessionData;
 
@@ -26,6 +29,8 @@ namespace Assets.Scripts.Data
 
         public void SwitchState(GameState newState)
         {
+            OnBeforeStateEnter?.Invoke(newState);
+
             switch (newState)
             {
                 case GameState.MainMenu:
@@ -35,16 +40,16 @@ namespace Assets.Scripts.Data
                     SceneManager.LoadScene("Game");
                     break;
                 case GameState.SpawnEnemies:
-                    OnSpawnEnemies?.Invoke();
+                    //OnSpawnEnemies?.Invoke();
                     break;
                 case GameState.Countdown:
-                    OnStartCoundown?.Invoke();
+                    //OnStartCoundown?.Invoke();
                     break;
                 case GameState.Gameplay:
-                    OnStartGame?.Invoke();
+                    //OnStartGame?.Invoke();
                     break;
                 case GameState.PostGame:
-                    OnLevelCleared?.Invoke();
+                    //OnLevelCleared?.Invoke();
                     break;
                 case GameState.Pause:
                     break;
@@ -53,6 +58,8 @@ namespace Assets.Scripts.Data
             }
 
             _state = newState;
+
+            OnAfterStateEnter?.Invoke(newState);
         }
     }
 

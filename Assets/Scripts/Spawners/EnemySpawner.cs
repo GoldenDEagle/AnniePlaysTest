@@ -29,11 +29,14 @@ namespace Assets.Scripts.Spawners
 
         private void Awake()
         {
-            _gameStateHandler.OnSpawnEnemies += SpawnEnemies;
+            _gameStateHandler.OnAfterStateEnter += SpawnEnemies;
         }
 
-        public void SpawnEnemies()
+        public void SpawnEnemies(GameState gameState)
         {
+            if (gameState != GameState.SpawnEnemies)
+                return;
+
             _enemyFactory.Load();
             _coroutine = StartCoroutine(SpawnRoutine());
         }
@@ -52,7 +55,7 @@ namespace Assets.Scripts.Spawners
 
         private void OnDestroy()
         {
-            _gameStateHandler.OnSpawnEnemies -= SpawnEnemies;
+            _gameStateHandler.OnAfterStateEnter -= SpawnEnemies;
 
             if (_coroutine != null)
             {

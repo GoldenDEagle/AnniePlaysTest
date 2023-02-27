@@ -1,11 +1,12 @@
-﻿using Assets.Scripts.UniversalComponents;
+﻿using Assets.Scripts.Projectiles.Pooling;
+using Assets.Scripts.UniversalComponents;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace Assets.Scripts.Projectiles
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Projectile : MonoBehaviour
+    public class Projectile : MonoBehaviour, IPoolable<Projectile>
     {
         private Rigidbody _rigidbody;
         private IObjectPool<Projectile> _pool;
@@ -30,6 +31,12 @@ namespace Assets.Scripts.Projectiles
             {
                 health.ModifyHealth(-_damage);
             }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            HitParticles particles = ParticlesPool.Instance.Pool.Get();
+            particles.transform.position = transform.position;
         }
 
         // bind instance to pool
