@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1376364369147104132}
   - component: {fileID: 3121482235073298779}
   - component: {fileID: 3203222056000441735}
-  - component: {fileID: 6289422231110407841}
+  - component: {fileID: 5084548677959179104}
   m_Layer: 6
   m_Name: enemy_ground
   m_TagString: Untagged
@@ -139,11 +139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04437eecb876b954a8d11da4e7efadcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxMovementDistance: 4
   _shootingDuration: 2
   _coinValue: 1
   _weapon: {fileID: 5592930884994610712}
-  _mover: {fileID: 6289422231110407841}
+  _mover: {fileID: 5084548677959179104}
 --- !u!114 &3121482235073298779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectToDestroy: {fileID: 1376364369147104190}
---- !u!114 &6289422231110407841
+--- !u!114 &5084548677959179104
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,10 +197,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1376364369147104190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f51c32c529a5a8b44aececfc1036775a, type: 3}
+  m_Script: {fileID: 11500000, guid: bf38a003d253455439488e44ff767ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxMovementDistance: 4
+  _attemptsToFindPosition: 5
 --- !u!1 &3911058938993181865
 GameObject:
   m_ObjectHideFlags: 0

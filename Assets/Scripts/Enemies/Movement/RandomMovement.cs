@@ -34,19 +34,5 @@ namespace Assets.Scripts.Enemies.Movement
                 yield return null;
             }
         }
-
-        // get random point on navmesh within radius
-        public Vector3 RandomNavmeshLocation(float radius)
-        {
-            Vector3 randomDirection = Random.onUnitSphere * radius;
-            randomDirection.y = 0f;
-            randomDirection += transform.position;
-            Vector3 finalPosition = Vector3.zero;
-            if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, radius, 1))
-            {
-                finalPosition = hit.position;
-            }
-            return finalPosition;
-        }
     }
 }
